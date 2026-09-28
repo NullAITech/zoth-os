@@ -83,7 +83,7 @@
       ],
       "filesystem_policy": {
         "read_paths": [
-          "/home/neo",
+          "/home/zoth",
           "/etc",
           "/var/log",
           "/usr/share/zothos",
@@ -93,7 +93,7 @@
           "/sys"
         ],
         "write_paths": [
-          "/home/neo",
+          "/home/zoth",
           "/var/lib/zothos",
           "/tmp",
           "/etc/zothos"
@@ -188,7 +188,7 @@
       ],
       "filesystem_policy": {
         "read_paths": [
-          "/home/neo",
+          "/home/zoth",
           "/usr/share/zothos",
           "/opt",
           "/etc/zothos",
@@ -196,7 +196,7 @@
           "/tmp"
         ],
         "write_paths": [
-          "/home/neo",
+          "/home/zoth",
           "/var/lib/zothos",
           "/tmp"
         ],
@@ -205,8 +205,8 @@
           "/boot",
           "/etc/shadow",
           "/etc/sudoers",
-          "/home/neo/.ssh/id_rsa",
-          "/home/neo/.ssh/id_ed25519"
+          "/home/zoth/.ssh/id_rsa",
+          "/home/zoth/.ssh/id_ed25519"
         ]
       },
       "network_egress_policy": {
@@ -278,7 +278,7 @@
       "filesystem_policy": {
         "read_paths": [
           "/tmp/zothos-sandbox",
-          "/home/neo/sandbox",
+          "/home/zoth/sandbox",
           "/proc/stat",
           "/proc/meminfo"
         ],
@@ -286,8 +286,8 @@
           "/tmp/zothos-sandbox"
         ],
         "forbidden_paths": [
-          "/home/neo/.ssh",
-          "/home/neo/.config/zothos/env",
+          "/home/zoth/.ssh",
+          "/home/zoth/.config/zothos/env",
           "/etc",
           "/var",
           "/root",

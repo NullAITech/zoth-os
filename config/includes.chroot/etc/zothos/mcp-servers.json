@@ -13,7 +13,7 @@
       "offline": true,
       "securityRing": "RING_2_TOOLMASTER",
       "ring_level": 2,
-      "sandbox": "/home/neo/.hexstrike",
+      "sandbox": "/home/zoth/.hexstrike",
       "fallbackHandler": "/usr/local/bin/zoth-sec mcp",
       "timeout": 300,
       "alwaysAllow": []
@@ -23,7 +23,7 @@
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "/home/neo",
+        "/home/zoth",
         "/usr/share/zothos",
         "/opt",
         "/etc/zothos",
@@ -34,7 +34,7 @@
       "offline": true,
       "securityRing": "RING_1_SYSADMIN",
       "ring_level": 1,
-      "sandbox": "/home/neo",
+      "sandbox": "/home/zoth",
       "fallbackHandler": "python3 /usr/local/bin/zoth-agent-os mcp_fs",
       "timeout": 60,
       "alwaysAllow": []
@@ -79,7 +79,7 @@
       "offline": true,
       "securityRing": "RING_1_SYSADMIN",
       "ring_level": 1,
-      "sandbox": "/home/neo",
+      "sandbox": "/home/zoth",
       "fallbackHandler": "/usr/local/bin/zoth-sec",
       "timeout": 300,
       "alwaysAllow": []
@@ -127,7 +127,7 @@
       "offline": true,
       "securityRing": "RING_0_SOVEREIGN",
       "ring_level": 0,
-      "sandbox": "/home/neo/.hermes",
+      "sandbox": "/home/zoth/.hermes",
       "fallbackHandler": "/usr/local/bin/hermes",
       "timeout": 300,
       "alwaysAllow": []
@@ -142,7 +142,7 @@
       "offline": true,
       "securityRing": "RING_0_SOVEREIGN",
       "ring_level": 0,
-      "sandbox": "/home/neo",
+      "sandbox": "/home/zoth",
       "fallbackHandler": "/usr/local/bin/zoth-agent-os",
       "timeout": 300,
       "alwaysAllow": []
@@ -193,7 +193,7 @@
       "offline": false,
       "securityRing": "RING_2_TOOLMASTER",
       "ring_level": 2,
-      "sandbox": "/home/neo",
+      "sandbox": "/home/zoth",
       "fallbackHandler": "git",
       "timeout": 120,
       "alwaysAllow": []
