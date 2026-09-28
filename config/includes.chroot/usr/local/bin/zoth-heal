@@ -378,7 +378,7 @@ heal_network() {
     fi
 
     # 4. Tor Ghostmode Daemon Health
-    if [[ -f "/home/neo/.config/zothos/ghostmode_active" ]] || [[ -f "$HOME/.config/zothos/ghostmode_active" ]]; then
+    if [[ -f "/home/zoth/.config/zothos/ghostmode_active" ]] || [[ -f "$HOME/.config/zothos/ghostmode_active" ]]; then
         log_info "ZothOS Ghostmode active; auditing Tor stealth proxy..."
         if ! pgrep -x tor >/dev/null 2>&1; then
             log_warn "Tor daemon stopped while Ghostmode is active; restarting Tor..."
@@ -580,7 +580,7 @@ EOF
 heal_desktop() {
     log_info "Auditing Desktop Config Integrity against /etc/skel Templates..."
     local mod_healed=0
-    local target_home="${HOME:-/home/neo}"
+    local target_home="${HOME:-/home/zoth}"
     local skel_dir="/etc/skel"
 
     if [[ ! -d "$skel_dir" ]]; then
