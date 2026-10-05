@@ -17,9 +17,9 @@ BOLD="\e[1m"
 RESET="\e[0m"
 
 MCP_CONFIG="/etc/zothos/mcp-servers.json"
-USER_MCP_CONFIG="${HOME:-/home/neo}/.config/zothos/mcp-servers.json"
-MCP_RUN_DIR="${HOME:-/home/neo}/.zothos/mcp/run"
-MCP_LOG_DIR="${HOME:-/home/neo}/.zothos/mcp/logs"
+USER_MCP_CONFIG="${HOME:-/home/zoth}/.config/zothos/mcp-servers.json"
+MCP_RUN_DIR="${HOME:-/home/zoth}/.zothos/mcp/run"
+MCP_LOG_DIR="${HOME:-/home/zoth}/.zothos/mcp/logs"
 
 # Resolve active config path
 get_config_path() {
@@ -27,8 +27,8 @@ get_config_path() {
         echo "$USER_MCP_CONFIG"
     elif [[ -f "$MCP_CONFIG" ]]; then
         echo "$MCP_CONFIG"
-    elif [[ -f "/home/neo/zothos/config/includes.chroot/etc/zothos/mcp-servers.json" ]]; then
-        echo "/home/neo/zothos/config/includes.chroot/etc/zothos/mcp-servers.json"
+    elif [[ -n "${ZOTHOS_SRC:-}" && -f "${ZOTHOS_SRC}/config/includes.chroot/etc/zothos/mcp-servers.json" ]]; then
+        echo "${ZOTHOS_SRC}/config/includes.chroot/etc/zothos/mcp-servers.json"
     else
         echo "$MCP_CONFIG"
     fi
@@ -150,7 +150,7 @@ cmd_health() {
         local fallback
         fallback=$(jq -r ".mcpServers[\"$s\"].fallbackHandler // \"none\"" "$cfg")
         local sandbox
-        sandbox=$(jq -r ".mcpServers[\"$s\"].sandbox // \"/home/neo\"" "$cfg")
+        sandbox=$(jq -r ".mcpServers[\"$s\"].sandbox // \"${HOME:-/home/zoth}\"" "$cfg")
 
         echo -e "${BOLD}▶ [${s}]${RESET} (${ring})"
         
@@ -271,7 +271,7 @@ cmd_sync() {
         return 1
     fi
 
-    local USER_HOME="${HOME:-/home/neo}"
+    local USER_HOME="${HOME:-/home/zoth}"
     
     # 1. Sync to Claude Code config
     local CLAUDE_CONFIG_DIR="$USER_HOME/.config/claude-code"
@@ -426,8 +426,10 @@ case "$action" in
     gui|app)
         if [[ -n "${DISPLAY:-}" ]] && command -v electron >/dev/null 2>&1 && [[ -d "/opt/zoth-mcp-app" ]]; then
             exec electron /opt/zoth-mcp-app
-        elif [[ -d "/home/neo/zothos/config/includes.chroot/opt/zoth-mcp-app" ]]; then
-            exec /home/neo/zothos/config/includes.chroot/opt/electron/electron /home/neo/zothos/config/includes.chroot/opt/zoth-mcp-app
+        elif [[ -n "${ZOTHOS_SRC:-}" && -d "${ZOTHOS_SRC}/config/includes.chroot/opt/zoth-mcp-app" ]]; then
+            local elec_bin="electron"
+            [[ -x "${ZOTHOS_SRC}/config/includes.chroot/opt/electron/electron" ]] && elec_bin="${ZOTHOS_SRC}/config/includes.chroot/opt/electron/electron"
+            exec "$elec_bin" "${ZOTHOS_SRC}/config/includes.chroot/opt/zoth-mcp-app"
         else
             interactive_menu
         fi
