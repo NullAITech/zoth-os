@@ -11,7 +11,7 @@
 | Criterion | Status | Evidence / Implementation |
 | :--- | :--- | :--- |
 | **Open Source License** | **PASS** | Licensed under the MIT License ([`LICENSE`](file:///home/zoth/NullAITech/zoth-os/LICENSE)). |
-| **Project Website / Hub** | **PASS** | [`https://nullai.tech`](https://nullai.tech) and [`https://github.com/NullAITech/zoth-os`](https://github.com/NullAITech/zoth-os). |
+| **Project Website / Hub** | **PASS** | [`https://zothos.nullai.tech`](https://zothos.nullai.tech) and [`https://github.com/NullAITech/zoth-os`](https://github.com/NullAITech/zoth-os). |
 | **Documentation** | **PASS** | Complete architectural and operational guides in [`docs/`](file:///home/zoth/NullAITech/zoth-os/docs/) and [`README.md`](file:///home/zoth/NullAITech/zoth-os/README.md). |
 | **English Language** | **PASS** | All documentation, source comments, and error messages are written in clear, technical English. |
 

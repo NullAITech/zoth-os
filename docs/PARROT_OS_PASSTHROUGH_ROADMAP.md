@@ -15,7 +15,7 @@ The system configuration inspected on this machine:
 | :--- | :--- | :--- |
 | **Drive / Bus** | `/dev/nvme0n1` (NVMe PCIe) | `/dev/sda` (SATA 6Gb/s) |
 | **Model** | WD Blue SN570 500GB | LITEON CV3-CE512-11 SATA 512GB |
-| **Serial / ID** | `TW001D79LOH0079L01KB` | `/dev/disk/by-id/ata-LITEON_CV3-CE512-11_SATA_512GB_TW001D79LOH0079L01KB` |
+| **Serial / ID** | Host NVMe | Secondary SATA. Resolve live with `ls /dev/disk/by-id/ata-LITEON*` — do not publish the serial. |
 | **Partition Table** | GPT (`nvme0n1p1` ext4 root, `p2` EFI) | DOS/MBR (`sda1` bootable Btrfs root, `sda2` swap) |
 | **Host CPU & RAM** | 24 vCPU Threads | 32 GB Physical RAM (~22 GB available) |
 | **Acceleration** | Intel KVM active (`/dev/kvm`) | `qemu-system-x86_64` (v10.0.13) installed |
@@ -47,7 +47,7 @@ To launch Parrot OS without needing `sudo` every time (which preserves native Wa
 
 ```bash
 # File: /etc/udev/rules.d/99-parrot-disk.rules
-KERNEL=="sda*", SUBSYSTEM=="block", ENV{ID_SERIAL_SHORT}=="TW001D79LOH0079L01KB", GROUP="kvm", MODE="0660"
+KERNEL=="sda*", SUBSYSTEM=="block", ENV{ID_SERIAL_SHORT}=="<ID_SERIAL_SHORT from udevadm info /dev/sda>", GROUP="kvm", MODE="0660"
 ```
 
 Apply the rule:
@@ -66,7 +66,7 @@ Create the launcher script at `~/bin/launch-parrot.sh` or `~/.local/bin/launch-p
 #!/usr/bin/env bash
 set -euo pipefail
 
-DISK_ID="/dev/disk/by-id/ata-LITEON_CV3-CE512-11_SATA_512GB_TW001D79LOH0079L01KB"
+DISK_ID="$(ls /dev/disk/by-id/ata-LITEON_CV3-CE512-11_SATA_512GB_* | head -1)"
 RAM_SIZE="12G"      # Allocates 12GB of your 32GB
 CPU_CORES="8"       # Allocates 8 of your 24 CPU threads
 
@@ -148,7 +148,7 @@ If you prefer a full graphical hypervisor interface to adjust settings:
    ```
 2. In `virt-manager`:
    - Click **Create New Virtual Machine** -> **Import existing disk image**.
-   - Browse to path: `/dev/disk/by-id/ata-LITEON_CV3-CE512-11_SATA_512GB_TW001D79LOH0079L01KB`.
+   - Browse to the live `ata-LITEON*` by-id path from `ls /dev/disk/by-id/`.
    - Set OS Type: **Debian 12** or **Linux**.
    - Configure CPU: 8 cores, Memory: 12288 MB.
    - Check **Customize configuration before install**:
