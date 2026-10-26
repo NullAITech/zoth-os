@@ -4,6 +4,17 @@
 # ==============================================================================
 set -eo pipefail
 
+if [ -f /etc/zothos/paths.sh ]; then
+  # shellcheck disable=SC1091
+  . /etc/zothos/paths.sh
+fi
+: "${ZOTH_USER:=zoth}"
+: "${AZOTH_USER:=azoth}"
+: "${ZOTH_HOME:=/home/${ZOTH_USER}}"
+: "${AZOTH_HOME:=/home/${AZOTH_USER}}"
+: "${ZOTH_ACTIVE_HOME:=${HOME:-${ZOTH_HOME}}}"
+: "${ZOTH_SRC_ROOT:=${ZOTH_ACTIVE_HOME}/NullAITech}"
+
 GOLD='\033[38;2;212;175;55m'
 CYAN='\033[38;2;56;189;248m'
 GREEN='\033[38;2;52;211;153m'
@@ -13,7 +24,7 @@ BOLD='\033[1m'
 NC='\033[0m'
 
 CANDIDATES=(
-  "/home/zoth/NullAITech/zoth-webgen"
+  "${ZOTH_SRC_ROOT}/zoth-webgen"
   "${HOME}/NullAITech/zoth-webgen"
   "/opt/zoth-webgen"
   "${HOME}/zoth-webgen"
@@ -136,7 +147,7 @@ for i, t in enumerate(list_production_templates(), 1):
       stack="${stack:-html}"
       read -rp "  Site Name [Sovereign Studio]: " sname
       sname="${sname:-Sovereign Studio}"
-      out_dir="/home/zoth/NullAITech/generated-sites/$(echo "$sname" | tr '[:upper:] ' '[:lower:]-')"
+      out_dir="${ZOTH_SRC_ROOT}/generated-sites/$(echo "$sname" | tr '[:upper:] ' '[:lower:]-')"
       python3 "$REPO_DIR/webgen_engine.py" --preset "$preset" --stack "$stack" --name "$sname" --project "$out_dir"
       echo ""
       read -rp "  Press [ENTER] to continue..." _

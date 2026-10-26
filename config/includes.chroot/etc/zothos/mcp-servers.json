@@ -1,5 +1,5 @@
 {
-  "description": "ZOTHOS Master Model Context Protocol (MCP) Server Registry. Servers with enabled true are started by coding agents. The others are installed in the catalog and stay off until zoth-mcp enable <name>.",
+  "description": "ZOTHOS Master Model Context Protocol (MCP) Server Registry. Servers with enabled true are started by coding agents. The others are installed in the catalog and stay off until zoth-mcp enable <name>. Path tokens ${ZOTH_HOME} and ${ZOTH_SRC_ROOT} are expanded by zoth-mcp sync to the active home and checkout root.",
   "version": "3.1.0",
   "updated": "2026-10-08",
   "mcpServers": {
@@ -8,7 +8,7 @@
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem@2026.8.31",
-        "/home/zoth",
+        "${ZOTH_HOME}",
         "/usr/share/zothos",
         "/opt",
         "/etc/zothos",
@@ -19,7 +19,7 @@
       "enabled": false,
       "securityRing": "RING_1_SYSADMIN",
       "ring_level": 1,
-      "sandbox": "/home/zoth",
+      "sandbox": "${ZOTH_HOME}",
       "fallbackHandler": "python3 /usr/local/bin/zoth-agent-os mcp_fs",
       "timeout": 60,
       "alwaysAllow": []
@@ -35,8 +35,8 @@
       "enabled": false,
       "securityRing": "RING_0_SOVEREIGN",
       "ring_level": 0,
-      "sandbox": "/home/zoth/.zothos/mcp",
-      "fallbackHandler": "sqlite3 /home/zoth/.zothos/mcp/knowledge.db",
+      "sandbox": "${ZOTH_HOME}/.zothos/mcp",
+      "fallbackHandler": "sqlite3 ${ZOTH_HOME}/.zothos/mcp/knowledge.db",
       "timeout": 60,
       "alwaysAllow": []
     },
@@ -52,7 +52,7 @@
       "enabled": true,
       "securityRing": "RING_0_SOVEREIGN",
       "ring_level": 0,
-      "sandbox": "/home/zoth/.neuro_memory",
+      "sandbox": "${ZOTH_HOME}/.neuro_memory",
       "fallbackHandler": "python3 -m neuro_memory_daemon.cli search ''",
       "timeout": 60,
       "alwaysAllow": []
@@ -83,7 +83,7 @@
       "enabled": false,
       "securityRing": "RING_2_TOOLMASTER",
       "ring_level": 2,
-      "sandbox": "/home/zoth",
+      "sandbox": "${ZOTH_HOME}",
       "fallbackHandler": "git",
       "timeout": 60,
       "alwaysAllow": []
@@ -123,15 +123,15 @@
       "args": [
         "mcp-server-sqlite",
         "--db-path",
-        "/home/zoth/.zothos/mcp/knowledge.db"
+        "${ZOTH_HOME}/.zothos/mcp/knowledge.db"
       ],
       "description": "Official SQLite server (PyPI mcp-server-sqlite). Local database at ~/.zothos/mcp/knowledge.db.",
       "offline": true,
       "enabled": false,
       "securityRing": "RING_1_SYSADMIN",
       "ring_level": 1,
-      "sandbox": "/home/zoth/.zothos/mcp/knowledge.db",
-      "fallbackHandler": "sqlite3 /home/zoth/.zothos/mcp/knowledge.db",
+      "sandbox": "${ZOTH_HOME}/.zothos/mcp/knowledge.db",
+      "fallbackHandler": "sqlite3 ${ZOTH_HOME}/.zothos/mcp/knowledge.db",
       "timeout": 60,
       "alwaysAllow": []
     },
@@ -239,7 +239,7 @@
       "enabled": false,
       "securityRing": "RING_2_TOOLMASTER",
       "ring_level": 2,
-      "sandbox": "/home/zoth",
+      "sandbox": "${ZOTH_HOME}",
       "fallbackHandler": "git",
       "timeout": 120,
       "alwaysAllow": []
@@ -343,7 +343,7 @@
       "enabled": false,
       "securityRing": "RING_2_TOOLMASTER",
       "ring_level": 2,
-      "sandbox": "/home/zoth",
+      "sandbox": "${ZOTH_HOME}",
       "fallbackHandler": "firebase",
       "timeout": 180,
       "alwaysAllow": []
@@ -359,7 +359,7 @@
       "enabled": false,
       "securityRing": "RING_1_SYSADMIN",
       "ring_level": 1,
-      "sandbox": "/home/zoth",
+      "sandbox": "${ZOTH_HOME}",
       "fallbackHandler": "az",
       "timeout": 180,
       "alwaysAllow": []
@@ -441,7 +441,7 @@
       "securityRing": "RING_1_SYSADMIN",
       "ring_level": 1,
       "sandbox": "postgresql://postgres@localhost:5432/zothos",
-      "fallbackHandler": "sqlite3 /home/zoth/.zothos/mcp/knowledge.db",
+      "fallbackHandler": "sqlite3 ${ZOTH_HOME}/.zothos/mcp/knowledge.db",
       "timeout": 120,
       "alwaysAllow": []
     },
@@ -467,14 +467,14 @@
         "-y",
         "@duckdb/mcp-server",
         "--db-path",
-        "/home/zoth/.zothos/mcp/analytics.duckdb"
+        "${ZOTH_HOME}/.zothos/mcp/analytics.duckdb"
       ],
       "description": "Placeholder. @duckdb/mcp-server was not on npm on 2026-10-07, so this stays off.",
       "offline": true,
       "enabled": false,
       "securityRing": "RING_1_SYSADMIN",
       "ring_level": 1,
-      "sandbox": "/home/zoth/.zothos/mcp/analytics.duckdb",
+      "sandbox": "${ZOTH_HOME}/.zothos/mcp/analytics.duckdb",
       "fallbackHandler": "python3 -c 'import duckdb'",
       "timeout": 120,
       "alwaysAllow": []
@@ -512,7 +512,7 @@
       "enabled": false,
       "securityRing": "RING_2_TOOLMASTER",
       "ring_level": 2,
-      "sandbox": "/home/zoth",
+      "sandbox": "${ZOTH_HOME}",
       "fallbackHandler": "git",
       "timeout": 120,
       "alwaysAllow": []
@@ -669,7 +669,7 @@
       "enabled": false,
       "securityRing": "RING_2_TOOLMASTER",
       "ring_level": 2,
-      "sandbox": "/home/zoth/.hexstrike",
+      "sandbox": "${ZOTH_HOME}/.hexstrike",
       "fallbackHandler": "/usr/local/bin/zoth-sec mcp",
       "timeout": 300,
       "alwaysAllow": []
@@ -685,7 +685,7 @@
       "enabled": false,
       "securityRing": "RING_1_SYSADMIN",
       "ring_level": 1,
-      "sandbox": "/home/zoth",
+      "sandbox": "${ZOTH_HOME}",
       "fallbackHandler": "/usr/local/bin/zoth-sec",
       "timeout": 300,
       "alwaysAllow": []
@@ -700,7 +700,7 @@
       "enabled": false,
       "securityRing": "RING_0_SOVEREIGN",
       "ring_level": 0,
-      "sandbox": "/home/zoth/.hermes",
+      "sandbox": "${ZOTH_HOME}/.hermes",
       "fallbackHandler": "/usr/local/bin/hermes",
       "timeout": 300,
       "alwaysAllow": []
@@ -716,7 +716,7 @@
       "enabled": false,
       "securityRing": "RING_0_SOVEREIGN",
       "ring_level": 0,
-      "sandbox": "/home/zoth",
+      "sandbox": "${ZOTH_HOME}",
       "fallbackHandler": "/usr/local/bin/zoth-agent-os",
       "timeout": 300,
       "alwaysAllow": []
@@ -2623,7 +2623,7 @@
       "enabled": false,
       "securityRing": "RING_1_SYSADMIN",
       "ring_level": 1,
-      "sandbox": "/home/zoth",
+      "sandbox": "${ZOTH_HOME}",
       "fallbackHandler": "/bin/bash",
       "timeout": 120,
       "alwaysAllow": []
@@ -2689,7 +2689,7 @@
       "enabled": false,
       "securityRing": "RING_1_SYSADMIN",
       "ring_level": 1,
-      "sandbox": "/home/zoth/.local/share/caido",
+      "sandbox": "${ZOTH_HOME}/.local/share/caido",
       "fallbackHandler": "curl -s http://127.0.0.1:8080",
       "timeout": 120,
       "alwaysAllow": []
@@ -2726,7 +2726,7 @@
       "enabled": false,
       "securityRing": "RING_0_SOVEREIGN",
       "ring_level": 0,
-      "sandbox": "/home/zoth/.zothos/mcp",
+      "sandbox": "${ZOTH_HOME}/.zothos/mcp",
       "fallbackHandler": "true",
       "timeout": 90,
       "alwaysAllow": []
@@ -2737,14 +2737,14 @@
         "mem0-mcp"
       ],
       "env": {
-        "MEM0_DIR": "/home/zoth/.zothos/data/mem0"
+        "MEM0_DIR": "${ZOTH_HOME}/.zothos/data/mem0"
       },
       "description": "Mem0 Scalable Multi-Tier Memory Layer MCP. User, session, and agent persistent memory indexing.",
       "offline": true,
       "enabled": false,
       "securityRing": "RING_0_SOVEREIGN",
       "ring_level": 0,
-      "sandbox": "/home/zoth/.zothos/data/mem0",
+      "sandbox": "${ZOTH_HOME}/.zothos/data/mem0",
       "fallbackHandler": "true",
       "timeout": 60,
       "alwaysAllow": []
@@ -2766,7 +2766,7 @@
       "enabled": true,
       "securityRing": "RING_1_SYSADMIN",
       "ring_level": 1,
-      "sandbox": "/home/zoth",
+      "sandbox": "${ZOTH_HOME}",
       "fallbackHandler": "python3 -m ghidra_mcp --help",
       "alwaysAllow": [
         "get_program_info",

@@ -13,7 +13,7 @@ MCP servers in this tier bridge raw system access to agent runtimes, governed by
 
 1. **Official Filesystem Server (`@modelcontextprotocol/server-filesystem`)**
    - **Role**: Sandboxed workspace file operations (read, write, list, search, diff).
-   - **Sandbox Scope**: Enforced multi-directory boundaries: `/home/zoth`, `/opt`, `/etc/zothos`, `/tmp`, and `/usr/share/zothos`.
+   - **Sandbox Scope**: Enforced multi-directory boundaries: `${ZOTH_HOME}`, `/opt`, `/etc/zothos`, `/tmp`, and `/usr/share/zothos`.
    - **Security Ring**: `RING_1_SYSADMIN` (ring level 1).
    - **Transport**: `stdio` via Node.js (`npx -y @modelcontextprotocol/server-filesystem@2026.8.31`).
 
@@ -74,8 +74,8 @@ Tailored for Kali and Parrot OS integration within ZothOS.
    - Security Ring: `RING_1_SYSADMIN`. Command: `uvx mcp-server-sqlite --db-path ~/.zothos/mcp/knowledge.db`.
 2. **DuckDB MCP (`@duckdb/mcp-server` / `duckdb_mcp`)**:
    - High-performance embedded OLAP engine. Designed for columnar querying of large Parquet, CSV, and Arrow files with zero server overhead.
-   - Sandbox DB: `/home/zoth/.zothos/mcp/analytics.duckdb`.
-   - Security Ring: `RING_1_SYSADMIN`. Command: `npx -y @duckdb/mcp-server --db-path /home/zoth/.zothos/mcp/analytics.duckdb`.
+   - Sandbox DB: `${ZOTH_HOME}/.zothos/mcp/analytics.duckdb`.
+   - Security Ring: `RING_1_SYSADMIN`. Command: `npx -y @duckdb/mcp-server --db-path ${ZOTH_HOME}/.zothos/mcp/analytics.duckdb`.
 3. **PostgreSQL MCP (`@modelcontextprotocol/server-postgres`)**:
    - Binds local or remote Postgres databases (`postgresql://postgres@localhost:5432/zothos`).
    - Read-only guard mode by default with schema inspection and parameterized query execution.
@@ -160,7 +160,7 @@ Below are the exact production-ready JSON definitions to append to `/etc/zothos/
       "enabled": false,
       "securityRing": "RING_1_SYSADMIN",
       "ring_level": 1,
-      "sandbox": "/home/zoth",
+      "sandbox": "${ZOTH_HOME}",
       "fallbackHandler": "/bin/bash",
       "timeout": 120,
       "alwaysAllow": []
@@ -215,7 +215,7 @@ Below are the exact production-ready JSON definitions to append to `/etc/zothos/
       "enabled": false,
       "securityRing": "RING_1_SYSADMIN",
       "ring_level": 1,
-      "sandbox": "/home/zoth/.local/share/caido",
+      "sandbox": "${ZOTH_HOME}/.local/share/caido",
       "fallbackHandler": "curl -s http://127.0.0.1:8080",
       "timeout": 120,
       "alwaysAllow": []
@@ -246,7 +246,7 @@ Below are the exact production-ready JSON definitions to append to `/etc/zothos/
       "enabled": false,
       "securityRing": "RING_0_SOVEREIGN",
       "ring_level": 0,
-      "sandbox": "/home/zoth/.zothos/mcp",
+      "sandbox": "${ZOTH_HOME}/.zothos/mcp",
       "fallbackHandler": "true",
       "timeout": 90,
       "alwaysAllow": []
@@ -255,14 +255,14 @@ Below are the exact production-ready JSON definitions to append to `/etc/zothos/
       "command": "uvx",
       "args": ["mem0-mcp"],
       "env": {
-        "MEM0_DIR": "/home/zoth/.zothos/data/mem0"
+        "MEM0_DIR": "${ZOTH_HOME}/.zothos/data/mem0"
       },
       "description": "Mem0 Scalable Multi-Tier Memory Layer MCP. User, session, and agent persistent memory indexing.",
       "offline": true,
       "enabled": false,
       "securityRing": "RING_0_SOVEREIGN",
       "ring_level": 0,
-      "sandbox": "/home/zoth/.zothos/data/mem0",
+      "sandbox": "${ZOTH_HOME}/.zothos/data/mem0",
       "fallbackHandler": "true",
       "timeout": 60,
       "alwaysAllow": []
@@ -284,14 +284,14 @@ Follows standard ZothOS self-bootstrapping pattern:
 # ==============================================================================
 set -euo pipefail
 
-if ! command -v goose >/dev/null 2>&1 && [[ ! -f /home/zoth/.local/bin/goose ]]; then
+if ! command -v goose >/dev/null 2>&1 && [[ ! -f "${HOME}/.local/bin/goose" ]]; then
     echo -e "\e[38;2;255;215;0m[*] Provisioning AAIF Goose AI Agent CLI...\e[0m"
-    mkdir -p /home/zoth/.local/bin
+    mkdir -p "${HOME}/.local/bin"
     curl -fsSL https://github.com/aaif-goose/goose/releases/download/stable/download_cli.sh | bash
 fi
 
-if [[ -f /home/zoth/.local/bin/goose ]]; then
-    exec /home/zoth/.local/bin/goose "$@"
+if [[ -f "${HOME}/.local/bin/goose" ]]; then
+    exec "${HOME}/.local/bin/goose" "$@"
 elif command -v goose >/dev/null 2>&1; then
     exec goose "$@"
 else

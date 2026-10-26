@@ -1,5 +1,6 @@
 {
   "version": "3.0.0",
+  "path_tokens": "Expand ${ZOTH_HOME} to the active user home before enforcing filesystem_policy.",
   "name": "ZOTHOS Autonomous OS Agent Permission & Security Ring Architecture",
   "active_ring": 2,
   "active_layer": 2,
@@ -83,7 +84,7 @@
       ],
       "filesystem_policy": {
         "read_paths": [
-          "/home/zoth",
+          "${ZOTH_HOME}",
           "/etc",
           "/var/log",
           "/usr/share/zothos",
@@ -93,7 +94,7 @@
           "/sys"
         ],
         "write_paths": [
-          "/home/zoth",
+          "${ZOTH_HOME}",
           "/var/lib/zothos",
           "/tmp",
           "/etc/zothos"
@@ -204,7 +205,7 @@
       ],
       "filesystem_policy": {
         "read_paths": [
-          "/home/zoth",
+          "${ZOTH_HOME}",
           "/usr/share/zothos",
           "/opt",
           "/etc/zothos",
@@ -212,7 +213,7 @@
           "/tmp"
         ],
         "write_paths": [
-          "/home/zoth",
+          "${ZOTH_HOME}",
           "/var/lib/zothos",
           "/tmp"
         ],
@@ -221,8 +222,8 @@
           "/boot",
           "/etc/shadow",
           "/etc/sudoers",
-          "/home/zoth/.ssh/id_rsa",
-          "/home/zoth/.ssh/id_ed25519"
+          "${ZOTH_HOME}/.ssh/id_rsa",
+          "${ZOTH_HOME}/.ssh/id_ed25519"
         ]
       },
       "network_egress_policy": {
@@ -294,7 +295,7 @@
       "filesystem_policy": {
         "read_paths": [
           "/tmp/zothos-sandbox",
-          "/home/zoth/sandbox",
+          "${ZOTH_HOME}/sandbox",
           "/proc/stat",
           "/proc/meminfo"
         ],
@@ -302,8 +303,8 @@
           "/tmp/zothos-sandbox"
         ],
         "forbidden_paths": [
-          "/home/zoth/.ssh",
-          "/home/zoth/.config/zothos/env",
+          "${ZOTH_HOME}/.ssh",
+          "${ZOTH_HOME}/.config/zothos/env",
           "/etc",
           "/var",
           "/root",
