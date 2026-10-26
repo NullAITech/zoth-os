@@ -27,9 +27,11 @@
   <p>
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-ffd700.svg?style=for-the-badge&logo=opensourceinitiative&logoColor=black" alt="License: MIT" /></a>
     <a href="docs/VERIFYING.md"><img src="https://img.shields.io/badge/Releases-v3.3.0%20cosign%20signed-blue.svg?style=for-the-badge&logo=sigstore&logoColor=white" alt="Release signing status" /></a>
+    <a href="docs/TRUST.md"><img src="https://img.shields.io/badge/Supply%20Chain-SLSA%20%2B%20SBOM%20%2B%20VirusTotal-10b981.svg?style=for-the-badge&logo=virustotal&logoColor=white" alt="Supply Chain: SLSA + SBOM + VirusTotal" /></a>
     <a href="REPRODUCIBLE_BUILDS.md"><img src="https://img.shields.io/badge/Reproducible%20builds-in%20progress-yellow.svg?style=for-the-badge" alt="Reproducible builds: in progress" /></a>
     <a href="https://scorecard.dev/viewer/?repo=github.com/NullAITech/zoth-os"><img src="https://api.scorecard.dev/projects/github.com/NullAITech/zoth-os/badge" alt="OpenSSF Scorecard" /></a>
     <a href="https://github.com/NullAITech/zoth-os/actions/workflows/codeql.yml"><img src="https://github.com/NullAITech/zoth-os/actions/workflows/codeql.yml/badge.svg" alt="CodeQL" /></a>
+    <a href="https://github.com/NullAITech/zoth-os/actions/workflows/gitleaks.yml"><img src="https://github.com/NullAITech/zoth-os/actions/workflows/gitleaks.yml/badge.svg" alt="gitleaks" /></a>
     <a href="docs/OPENSSF_BEST_PRACTICES.md"><img src="https://img.shields.io/badge/OpenSSF%20Best%20Practices-not%20registered-lightgrey.svg?style=for-the-badge&logo=openssf&logoColor=white" alt="OpenSSF Best Practices: not registered" /></a>
     <a href="https://www.debian.org"><img src="https://img.shields.io/badge/Base-Debian%2013%20Trixie-d70a53.svg?style=for-the-badge&logo=debian&logoColor=white" alt="Base: Debian 13" /></a>
     <a href="https://kde.org/plasma-desktop/"><img src="https://img.shields.io/badge/Desktop-KDE%20Plasma%206.3-1d99f3.svg?style=for-the-badge&logo=kde&logoColor=white" alt="Desktop: KDE Plasma 6.3" /></a>
